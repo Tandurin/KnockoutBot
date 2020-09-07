@@ -1,46 +1,59 @@
+#Declare Imports
+
 from datetime import datetime
 
 from discord.ext.commands import Bot as BotBase
 from discord import Embed, File
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
+#Declare Global Vars
 PREFIX = "+"
 OWNER_IDS = [210003268082991104]
 
+#Define basic operation class
 class Bot(BotBase):
 	def __init__(self):
+		#Declare local class variables
 		self.PREFIX = PREFIX
 		self.ready = False
 		self.guild = None
 		self.scheduler = AsyncIOScheduler()
 
+		#Super __init__ as class copy
 		super().__init__(command_prefix=PREFIX, owners_ids=OWNER_IDS)
 
+	#Boot function
 	def run(self, version):
 		self.VERSION = version
 
 		with open("./lib/bot/token", "r", encoding="utf-8") as tf:
 			self.TOKEN = tf.read()
 
-		print("running bot...")
+		print("Booting up KnockoutBot")
 		super().run(self.TOKEN, reconnect=True)
 
+	#Connected function
 	async def on_connect(self):
 		print("Bot Connected")
 
+	#Disconnected function
 	async def on_disconnect(self):
 		print("Bot Disconnected")
 
+	#Bot connected to server
 	async def on_ready(self):
 
+		#Define local method variables
 		avatar = self.user.avatar_url
 		fileLocationAvatar = "./data/images/profile.png"
 
 		if not self.ready:
+			#Set connected state
 			self.ready = True
 			self.guild = self.get_guild(435119526200213514)
-			print("bot ready")
+			print("Bot Ready For Operation")
 
+			#Set Command-dump channel
 			channel = self.get_channel(752482031228682340)
 			await channel.send("Now online!")
 
@@ -62,6 +75,7 @@ class Bot(BotBase):
 		else:
 			print("bot reconnected")
 
+	#Check for message || Currently unused
 	async def on_message(self, message):
 		pass
 

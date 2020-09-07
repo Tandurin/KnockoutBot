@@ -34,7 +34,7 @@ class Bot(BotBase):
 	async def on_ready(self):
 
 		avatar = self.user.avatar_url
-		fileLocation = "./data/images/profile.png"
+		fileLocationAvatar = "./data/images/profile.png"
 
 		if not self.ready:
 			self.ready = True
@@ -56,7 +56,7 @@ class Bot(BotBase):
 			embed.set_image(url=avatar)
 			await channel.send(embed=embed)
 
-			await channel.send(file=File(fileLocation))
+			await channel.send(file=File(fileLocationAvatar))
 
 
 		else:

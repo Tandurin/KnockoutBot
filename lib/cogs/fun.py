@@ -6,6 +6,7 @@ from discord.ext.commands import Cog
 from discord.ext.commands import command
 
 GREETINGS = ['Hey', 'Hello', 'Sup', 'Greetings', 'Hi']
+DICE_ERROR = "I can't roll that many dice. Please try a maximum of 25 dice."
 
 
 class Fun(Cog):
@@ -26,11 +27,18 @@ class Fun(Cog):
             await ctx.send(" + ".join([str(r) for r in rolls]) + f" = {sum(rolls)}")
 
         else:
-            await ctx.send("I can't roll that many dice. Please try a lower number.")
+            await ctx.send(DICE_ERROR)
 
     @command(name="slap", aliases=["punch"])
-    async def slap_member(self, ctx, member: Member, *, reason: Optional[str] = "for no reason"):
-        await ctx.send(f"{ctx.author.display_name} slapped {member.mention} {reason}!")
+    async def slap_member(self, ctx, member: Member, *,
+                          reason: Optional[str] = "for no reason"):
+        await ctx.send(f"{ctx.author.display_name} "
+                       "slapped {member.mention} {reason}!")
+
+    @command(name="echo", aliases=["say"])
+    async def echo_message(self, ctx, *, message):
+        await ctx.message.delete()
+        await ctx.send(message)
 
     @Cog.listener()
     async def on_ready(self):

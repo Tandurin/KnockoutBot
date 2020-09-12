@@ -137,7 +137,9 @@ class Bot(BotBase):
 
     # Check for message || Currently unused
     async def on_message(self, message):
-        pass
+
+        if not message.author.bot:
+            await self.process_commands(message)
 
 
 bot = Bot()

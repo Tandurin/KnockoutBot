@@ -113,7 +113,8 @@ class Bot(BotBase):
 #                          description="KnockoutBot is now online.",
 #                          colour=baseColour, timestamp=datetime.utcnow())
 #            fields = [("Name", "Value", True),
-#                      ("Another field", "This field is next to the other one.",
+#                      ("Another field",
+#                       "This field is next to the other one.",
 #                       True),
 #                      ("A non-inline field",
 #                       "This field will appear on it's own row.", False)]
@@ -135,7 +136,7 @@ class Bot(BotBase):
         else:
             print("bot reconnected")
 
-    # Check for message || Currently unused
+    # Check for message
     async def on_message(self, message):
 
         if not message.author.bot:

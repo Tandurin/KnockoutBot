@@ -1,2 +1,5 @@
 
 lib/bot/token
+lib/db/__pycache__
+lib/bot/__pycache__
+data/db/database.db

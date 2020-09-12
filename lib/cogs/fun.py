@@ -20,9 +20,13 @@ class Fun(Cog):
     @command(name="dice", aliases=["roll"])
     async def roll_dice(self, ctx, die_string: str):
         dice, value = (int(term) for term in die_string.split("d"))
-        rolls = [randint(1, value) for i in range(dice)]
+        if dice <= 25:
+            rolls = [randint(1, value) for i in range(dice)]
 
-        await ctx.send(" + ".join([str(r) for r in rolls]) + f" = {sum(rolls)}")
+            await ctx.send(" + ".join([str(r) for r in rolls]) + f" = {sum(rolls)}")
+
+        else:
+            await ctx.send("I can't roll that many dice. Please try a lower number.")
 
     @command(name="slap", aliases=["punch"])
     async def slap_member(self, ctx, member: Member, *, reason: Optional[str] = "for no reason"):

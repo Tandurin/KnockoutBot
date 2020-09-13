@@ -18,7 +18,7 @@ class Fun(Cog):
     async def say_hello(self, ctx):
         await ctx.send(f"{choice(GREETINGS)} {ctx.author.mention}!")
 
-    @command(name="dice", aliases=["roll"])
+    """"@command(name="dice", aliases=["roll"])
     async def roll_dice(self, ctx, die_string: str):
         dice, value = (int(term) for term in die_string.split("d"))
         if dice <= 25:
@@ -27,7 +27,7 @@ class Fun(Cog):
             await ctx.send(" + ".join([str(r) for r in rolls]) + f" = {sum(rolls)}")
 
         else:
-            await ctx.send(DICE_ERROR)
+            await ctx.send(DICE_ERROR)""""
 
     @command(name="slap", aliases=["punch"])
     async def slap_member(self, ctx, member: Member, *,
